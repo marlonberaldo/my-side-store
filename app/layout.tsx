@@ -8,6 +8,8 @@ import Footer from "./_components/footer";
 
 import { CartProvider } from "@/context/cart-context";
 
+import { NuqsAdapter } from "nuqs/adapters/next";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -32,13 +34,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="pt-br">
       <body className={`${geistSans.variable} ${geistMono.variable} relative antialiased`}>
         <CartProvider>
-          <Header />
+          <NuqsAdapter>
+            <Header />
 
-          <div className="min-h-[calc(100vh-60px)] px-4 py-[50px] lg:px-6">
-            {children}
-          </div>
+            <div className="min-h-[calc(100vh-60px)] px-4 py-[50px] lg:px-6">
+              {children}
+            </div>
 
-          <Footer />
+            <Footer />
+          </NuqsAdapter>
         </CartProvider>
       </body>
     </html>
