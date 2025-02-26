@@ -1,4 +1,5 @@
 import ProductCard from "./_components/product-card";
+import CategoriesNav from "./_components/categories-nav";
 
 import { getProducts } from "@/services/products";
 
@@ -13,7 +14,9 @@ export default async function Home(props: Params) {
   });
 
   return (
-    <main>
+    <main className="space-y-[25px]">
+      <CategoriesNav />
+
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
         {products.map((product) => (
           <ProductCard
