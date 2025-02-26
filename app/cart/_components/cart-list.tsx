@@ -23,6 +23,22 @@ const CartList = () => {
     );
   }
 
+  if (cart.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center text-center">
+        <Image
+          src="/empty_cart.png"
+          alt="Carrinho vazio"
+          width={200}
+          height={200}
+          className="object-contain"
+        />
+        <p className="mt-2 text-lg font-semibold">Seu carrinho está vazio</p>
+        <p className="text-base text-muted-foreground">Adicione produtos ao carrinho para continuar</p>
+      </div>
+    );
+  }
+
   return (
     <ul className="space-y-2">
       {cart.map((item) => (
