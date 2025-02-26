@@ -4,6 +4,15 @@ import { Params } from "@/types/params";
 
 import ProductCard from "@/app/_components/product-card";
 
+export async function generateMetadata(params: Params) {
+  const { id } = await params.params;
+
+  return {
+    title: `Pesquisa por "${id}"`,
+    description: `Resultados da pesquisa por "${id}"`,
+  };
+}
+
 export default async function SearchIdPage(params: Params) {
   const { id } = await params.params;
 

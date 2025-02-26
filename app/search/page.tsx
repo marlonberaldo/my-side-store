@@ -1,8 +1,15 @@
+import { Metadata } from "next";
+
 import { getProducts } from "@/services/products";
 
 import { Params } from "@/types/params";
 
 import ProductCard from "../_components/product-card";
+
+export const metadata: Metadata = {
+  title: "Pesquisa",
+  description: "Página de pesquisa de produtos",
+};
 
 export default async function SearchPage(props: Params) {
   const { q: searchValue, page, limit } = await props.searchParams;
