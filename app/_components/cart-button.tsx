@@ -16,6 +16,7 @@ const CartButton = () => {
       <Button
         variant="outline"
         size="icon"
+        aria-label="Carrinho de compras"
       >
         <ShoppingCart />
       </Button>
@@ -28,6 +29,7 @@ const CartButton = () => {
     <Button
       variant="outline"
       size="icon"
+      aria-label="Carrinho de compras"
       asChild
     >
       <Link href="/cart" className="relative">

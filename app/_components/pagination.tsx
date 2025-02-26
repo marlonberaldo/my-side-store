@@ -41,6 +41,7 @@ export function Pagination({ hasMore, defaultPage = 1, defaultLimit = 15 }: Pagi
       <Button
         variant="ghost"
         size="icon"
+        aria-label="Página anterior"
         onClick={() => handlePageChange(Math.max(1, page - 1))}
         disabled={page === 1}
         className="disabled:opacity-40"
@@ -48,11 +49,18 @@ export function Pagination({ hasMore, defaultPage = 1, defaultLimit = 15 }: Pagi
         <ChevronLeft className="size-4" />
       </Button>
 
-      <Button variant="default" className="pointer-events-none font-semibold">{page}</Button>
+      <Button
+        variant="default"
+        className="pointer-events-none font-semibold"
+        aria-label="Página atual"
+      >
+        {page}
+      </Button>
 
       <Button
         variant="ghost"
         size="icon"
+        aria-label="Próxima página"
         onClick={() => handlePageChange(page + 1)}
         disabled={!hasMore}
         className="disabled:opacity-40"
@@ -60,7 +68,9 @@ export function Pagination({ hasMore, defaultPage = 1, defaultLimit = 15 }: Pagi
         <ChevronRight className="size-4" />
       </Button>
 
+      <label htmlFor="limit" className="sr-only">Selecione o limite:</label>
       <select
+        id="limit"
         value={limit}
         onChange={(e) => setLimit(Number(e.target.value))}
         className="rounded border px-2 py-1"
