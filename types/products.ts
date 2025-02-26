@@ -14,9 +14,11 @@ export type Product = {
 export type ProductParams = {
   limit?: number;
   page?: number;
+  query?: string;
 }
 
-export type ProductCategoryParams = ProductParams & {
+export type ProductCategoryParams = {
+  limit?: number;
   category: string;
 }
 
