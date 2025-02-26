@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Product } from "@/types/products";
 
 import { useCart } from "@/context/cart-context";
+
 import { CheckCircle, ShoppingCart } from "lucide-react";
 
 interface AddToCartButtonProps {

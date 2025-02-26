@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 import { useCart } from "@/context/cart-context";
+
 import { Minus, Plus } from "lucide-react";
 
 const CartList = () => {
