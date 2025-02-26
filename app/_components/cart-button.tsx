@@ -1,27 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+
+import { useCart } from "@/context/cart-context";
 
 import { ShoppingCart } from "lucide-react";
 
 const CartButton = () => {
-  const [count, setCount] = useState<number>(0);
+  const { cart, loading } = useCart();
 
-  const formattedCount = count > 9 ? "9+" : count;
+  if (loading) {
+    return (
+      <Button
+        variant="outline"
+        size="icon"
+      >
+        <ShoppingCart />
+      </Button>
+    );
+  }
+
+  const formattedCount = cart.length > 9 ? "9+" : cart.length;
 
   return (
     <Button
       variant="outline"
       size="icon"
-      className="relative"
-      onClick={() => setCount(prev => prev + 1)}
+      asChild
     >
-      <ShoppingCart />
-      <span className="absolute -right-2 -top-2 flex size-[20px] items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
-        {formattedCount}
-      </span>
+      <Link href="/cart" className="relative">
+        <ShoppingCart />
+        <span className="absolute -right-2 -top-2 flex size-[20px] items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
+          {formattedCount}
+        </span>
+      </Link>
     </Button>
   );
 };

@@ -11,7 +11,9 @@ import { cn } from "@/lib/utils";
 
 import { Product } from "@/types/products";
 
-import { CheckCircle, ChevronRight, ShoppingCart } from "lucide-react";
+import AddToCartButton from "./add-to-cart-button";
+
+import { ChevronRight } from "lucide-react";
 
 interface ProductCardProps {
   product: Product;
@@ -21,7 +23,6 @@ interface ProductCardProps {
 const ProductCard = ({ product, className }: ProductCardProps) => {
   const [src, setSrc] = useState(product.image || "/file.svg");
   const [isLoading, setLoading] = useState(true);
-  const [addToCart, setAddToCart] = useState(false);
 
   return (
     <div
@@ -81,17 +82,7 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
         </div>
 
         <div className="!mt-6 flex gap-2">
-          <Button
-            variant={addToCart ? "default" : "outline"}
-            size="icon"
-            className="shrink-0"
-            onClick={() => setAddToCart(prev => !prev)}
-          >
-            {addToCart
-              ? <CheckCircle className="size-4" />
-              : <ShoppingCart className="size-4" />
-            }
-          </Button>
+          <AddToCartButton product={product} size="icon" />
 
           <Button asChild variant="outline" className="group/button w-full">
             <Link href={`/products/${product.id}`}>

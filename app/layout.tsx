@@ -6,6 +6,8 @@ import "./globals.css";
 import Header from "./_components/header";
 import Footer from "./_components/footer";
 
+import { CartProvider } from "@/context/cart-context";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -29,13 +31,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="pt-br">
       <body className={`${geistSans.variable} ${geistMono.variable} relative antialiased`}>
-        <Header />
+        <CartProvider>
+          <Header />
 
-        <div className="min-h-[calc(100vh-60px)] px-4 py-[50px] lg:px-6">
-          {children}
-        </div>
+          <div className="min-h-[calc(100vh-60px)] px-4 py-[50px] lg:px-6">
+            {children}
+          </div>
 
-        <Footer />
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );
