@@ -16,11 +16,7 @@ export async function generateMetadata(params: Params) {
 export default async function SearchIdPage(params: Params) {
   const { id } = await params.params;
 
-  const { products } = await getProductsByCategory({
-    category: id,
-    limit: 10,
-    page: 1,
-  });
+  const { products } = await getProductsByCategory({ category: id });
 
   const resultsText = products.length > 1 ? "resultados" : "resultado";
 
