@@ -110,6 +110,11 @@ const eslintConfig = [
               "pattern": "@/types/**",
               "group": "internal",
               "position": "before"
+            },
+            {
+              "pattern": "@/context/**",
+              "group": "internal",
+              "position": "before"
             }
           ],
           "pathGroupsExcludedImportTypes": [
