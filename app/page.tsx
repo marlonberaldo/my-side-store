@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import ProductCard from "./_components/product-card";
 import CategoriesNav from "./_components/categories-nav";
 
@@ -5,7 +7,7 @@ import { getProducts } from "@/services/products";
 
 import { Params } from "@/types/params";
 
-export default async function Home(props: Params) {
+async function GetProducts({ props }: { props: Params }) {
   const { page, limit } = await props.searchParams;
 
   const { products } = await getProducts({
@@ -14,18 +16,42 @@ export default async function Home(props: Params) {
   });
 
   return (
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+      {products.map((product) => (
+        <ProductCard
+          key={product.id}
+          product={product}
+          className="md:first-of-type:col-span-2"
+        />
+      ))}
+    </div>
+  );
+}
+
+function ProductsFallback() {
+  return (
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+      {Array
+        .from({ length: 15 })
+        .map((_, index) => (
+          <div
+            key={`product-${index}`}
+            className="h-[450px] w-full animate-pulse rounded-lg border bg-primary/10 shadow md:first-of-type:col-span-2"
+          />
+        ))}
+    </div>
+  );
+}
+
+export default function Home(props: Params) {
+
+  return (
     <main className="space-y-[25px]">
       <CategoriesNav />
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            className="md:first-of-type:col-span-2"
-          />
-        ))}
-      </div>
+      <Suspense fallback={<ProductsFallback />}>
+        <GetProducts props={props} />
+      </Suspense>
     </main>
   );
 }
