@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 
 import ProductCard from "./_components/product-card";
-import CategoriesNav from "./_components/categories-nav";
 import { Pagination } from "./_components/pagination";
 
 import { getProducts } from "@/services/products";
@@ -51,9 +50,7 @@ function ProductsFallback() {
 export default function Home(props: Params) {
 
   return (
-    <main className="space-y-[25px]">
-      <CategoriesNav />
-
+    <main>
       <Suspense fallback={<ProductsFallback />}>
         <GetProducts props={props} />
       </Suspense>
