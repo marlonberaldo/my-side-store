@@ -24,6 +24,7 @@ const SearchForm = ({ className }: SearchFormProps) => {
 
   return (
     <form
+      role="form"
       onSubmit={handleSubmit}
       className={cn("relative w-full max-w-[400px] rounded-lg border bg-background", className)}
     >

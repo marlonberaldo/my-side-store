@@ -12,13 +12,13 @@ type CartState = {
   cart: CartItem[];
 };
 
-type CartAction =
+export type CartAction =
   | { type: "ADD_TO_CART"; payload: Product }
   | { type: "REMOVE_FROM_CART"; payload: number }
   | { type: "UPDATE_QUANTITY"; payload: { id: number; quantity: number } }
   | { type: "CLEAR_CART" };
 
-const cartReducer = (state: CartState, action: CartAction): CartState => {
+export const cartReducer = (state: CartState, action: CartAction): CartState => {
   switch (action.type) {
     case "ADD_TO_CART": {
       const existingItem = state.cart.find(item => item.id === action.payload.id);

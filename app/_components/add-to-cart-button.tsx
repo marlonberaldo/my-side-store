@@ -33,10 +33,8 @@ const AddToCartButton = ({ product, className, size }: AddToCartButtonProps) => 
       className={cn("flex items-center gap-2 shrink-0", className)}
       size={size}
       onClick={handleCartToggle}
-      aria-label={isInCart
-        ? `Remover ${product.title} do carrinho`
-        : `Adicionar ${product.title} ao carrinho`
-      }
+      role="button"
+      aria-label={`Adicionar ou remover ${product.title} do carrinho`}
     >
       {isInCart ? (
         <>
