@@ -20,7 +20,6 @@ export const SearchForm = ({ className, onSubmit }: SearchFormProps) => {
       action="/search"
       role="form"
       onSubmit={onSubmit}
-      scroll={true}
       className={cn("relative w-full max-w-[500px] rounded-lg border bg-background", className)}
     >
       <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
