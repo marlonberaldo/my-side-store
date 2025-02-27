@@ -79,7 +79,7 @@ export default async function SingleProductPage(props: Params) {
       <div className="relative flex flex-col justify-between gap-[25px] lg:flex-row lg:items-start">
         <div className="relative aspect-[2/1.5] w-full lg:w-1/2">
           <Image
-            src={"/a50.webp"} // product.image is not working, so I'm using a static image
+            src={product.image || "/a50.webp"} // if image is not available, use a default placeholder image
             alt={product.title}
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
