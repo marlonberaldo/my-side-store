@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 import { Geist, Geist_Mono } from "next/font/google";
 
@@ -26,6 +26,10 @@ export const metadata: Metadata = {
     template: "%s | My Side Store",
   },
   description: "Um simples e-commerce para você comprar o que quiser.",
+};
+
+export const viewport: Viewport = {
+  maximumScale: 1,
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
