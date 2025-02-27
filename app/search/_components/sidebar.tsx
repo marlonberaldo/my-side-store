@@ -1,7 +1,9 @@
 "use client";
 
+import { useState, useTransition } from "react";
+
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 
@@ -12,12 +14,47 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ categories }: SidebarProps) {
-
   const pathName = usePathname();
+  const router = useRouter();
+
+  const [isPending, startTransition] = useTransition();
+  const [selected, setSelected] = useState(pathName);
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    setSelected(value);
+
+    startTransition(() => {
+      router.replace(value);
+    });
+  };
 
   return (
-    <aside className="scrollbar-hide z-40 h-full overflow-x-auto bg-background lg:sticky lg:top-[60px] lg:w-[220px] lg:min-w-[220px] lg:border-r lg:p-4">
-      <ol className="flex gap-1 lg:flex-col">
+    <aside className="z-40 h-full bg-background lg:sticky lg:top-[60px] lg:w-[220px] lg:min-w-[220px] lg:border-r lg:p-4">
+      <div className="mb-4 lg:hidden">
+        <label htmlFor="category-select" className="sr-only">
+          Selecione uma categoria
+        </label>
+        <select
+          id="category-select"
+          className={cn("w-full sm:max-w-[350px] rounded border p-2",
+            isPending && "opacity-50 pointer-events-none animate-pulse"
+          )}
+          value={selected}
+          onChange={handleChange}
+        >
+          <option value="/search">Todos os produtos</option>
+          {categories
+            .sort((a, b) => a.localeCompare(b))
+            .map((category) => (
+              <option key={category} value={`/search/${category}`}>
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </option>
+            ))}
+        </select>
+      </div>
+
+      <ol className="hidden gap-1 lg:flex lg:flex-col">
         <li>
           <Button
             variant={pathName === "/search" ? "default" : "ghost"}
@@ -27,7 +64,7 @@ export default function Sidebar({ categories }: SidebarProps) {
             )}
           >
             <Link href="/search">
-              All products
+              Todos os produtos
             </Link>
           </Button>
         </li>
@@ -44,7 +81,7 @@ export default function Sidebar({ categories }: SidebarProps) {
                 )}
               >
                 <Link href={`/search/${category}`} aria-current={false}>
-                  {category}
+                  {category.charAt(0).toUpperCase() + category.slice(1)}
                 </Link>
               </Button>
             </li>
