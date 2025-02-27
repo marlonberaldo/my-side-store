@@ -102,6 +102,7 @@ const CartList = () => {
                 <Button
                   variant="ghost"
                   size="icon"
+                  aria-label="Diminuir quantidade"
                   disabled={item.quantity === 1}
                   onClick={() => dispatch({ type: "UPDATE_QUANTITY", payload: { id: item.id, quantity: item.quantity - 1 } })}
                 >
@@ -113,6 +114,7 @@ const CartList = () => {
                 <Button
                   variant="ghost"
                   size="icon"
+                  aria-label="Incrementar quantidade"
                   onClick={() => dispatch({ type: "UPDATE_QUANTITY", payload: { id: item.id, quantity: item.quantity + 1 } })}
                 >
                   <Plus className="size-4" />
@@ -121,6 +123,7 @@ const CartList = () => {
 
               <Button
                 variant="destructive"
+                aria-label="Remover do carrinho"
                 onClick={() => dispatch({ type: "REMOVE_FROM_CART", payload: item.id })}
               >
                 <Trash className="size-4" /> Remover
