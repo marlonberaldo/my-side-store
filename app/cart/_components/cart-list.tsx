@@ -2,11 +2,11 @@
 
 import React from "react";
 
-import Image from "next/image";
-
 import { Button } from "@/components/ui/button";
 
 import { useCart } from "@/context/cart-context";
+
+import BlurImage from "@/app/_components/blur-image";
 
 import { Minus, Plus, Trash } from "lucide-react";
 
@@ -26,7 +26,7 @@ const CartList = () => {
   if (cart.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center text-center">
-        <Image
+        <BlurImage
           src="/empty_cart.png"
           alt="Carrinho vazio"
           width={200}
@@ -47,7 +47,7 @@ const CartList = () => {
         {cart.map((item) => (
           <li key={item.id} className="mx-auto flex max-w-4xl flex-col items-start justify-between gap-4 rounded-lg border border-b-2 p-4 shadow md:flex-row md:items-center">
             <div className="flex flex-col items-start gap-x-10 gap-y-4 md:flex-row md:items-center">
-              <Image
+              <BlurImage
                 src={item.image || "/a50.webp"}
                 alt={item.title}
                 width={150}

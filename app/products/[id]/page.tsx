@@ -2,7 +2,6 @@ import { Suspense } from "react";
 
 import { Metadata } from "next";
 
-import Image from "next/image";
 import Link from "next/link";
 
 import { getProductById, getProductsByCategory } from "@/services/products";
@@ -11,6 +10,7 @@ import { Params } from "@/types/params";
 
 import AddToCartButton from "@/app/_components/add-to-cart-button";
 import ProductCard from "@/app/_components/product-card";
+import BlurImage from "@/app/_components/blur-image";
 
 export async function generateMetadata(props: Params): Promise<Metadata> {
   const { id } = await props.params;
@@ -78,7 +78,7 @@ export default async function SingleProductPage(props: Params) {
     <main className="space-y-[50px]">
       <div className="relative flex flex-col justify-between gap-[25px] lg:flex-row lg:items-start">
         <div className="relative aspect-[2/1.5] w-full lg:w-1/2">
-          <Image
+          <BlurImage
             src={product.image || "/a50.webp"} // if image is not available, use a default placeholder image
             alt={product.title}
             fill

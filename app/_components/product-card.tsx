@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -12,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { Product } from "@/types/products";
 
 import AddToCartButton from "./add-to-cart-button";
+import BlurImage from "./blur-image";
 
 import { ChevronRight } from "lucide-react";
 
@@ -22,7 +22,6 @@ interface ProductCardProps {
 
 const ProductCard = ({ product, className }: ProductCardProps) => {
   const [src, setSrc] = useState(product.image || "/file.svg");
-  const [isLoading, setLoading] = useState(true);
 
   return (
     <div
@@ -32,22 +31,18 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
         className
       )}
     >
-      <Image
+      <BlurImage
         src={src}
         alt={product.title}
         width={300}
         height={300}
         className={cn(
           "mx-auto object-contain object-center transition-transform",
-          isLoading
-            ? "scale-110 blur-2xl grayscale"
-            : "scale-100 blur-0 grayscale-0 ease-out duration-500",
           src === "/file.svg"
             ? "scale-75"
             : "scale-100 group-hover:scale-105"
         )}
         onError={() => setSrc("/file.svg")}
-        onLoad={() => setLoading(false)}
       />
 
       <div className="flex w-full flex-col justify-between space-y-3">
