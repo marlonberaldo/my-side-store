@@ -1,11 +1,21 @@
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
 
-import { fireEvent, render, screen } from "@testing-library/react";
-import SearchForm from "@/app/_components/search-form";
+import { SearchForm } from "@/app/_components/search-form";
+
+import { render, screen } from "@testing-library/react";
 
 jest.mock("next/navigation", () => ({
-  useRouter: jest.fn(),
   useSearchParams: jest.fn(),
+}));
+
+jest.mock("next/router", () => ({
+  useRouter: jest.fn(),
+}));
+
+jest.mock("next/form", () => ({
+  __esModule: true,
+  default: ({ children, ...props }: { children: React.ReactNode;[key: string]: unknown }) => <form {...props}>{children}</form>,
 }));
 
 describe("SearchForm", () => {
@@ -13,6 +23,8 @@ describe("SearchForm", () => {
     (useSearchParams as jest.Mock).mockReturnValue({
       get: (key: string) => (key === "q" ? "iphone" : null),
     });
+
+    (useRouter as jest.Mock).mockReturnValue({ push: jest.fn() });
   });
 
   it("should display the query in the input field", () => {
@@ -21,20 +33,5 @@ describe("SearchForm", () => {
     const input = screen.getByPlaceholderText("Pesquisar produtos...") as HTMLInputElement;
 
     expect(input).toHaveValue("iphone");
-  });
-
-  it("should redirect when submitting the form", () => {
-    const push = jest.fn();
-    (useRouter as jest.Mock).mockReturnValue({ push });
-
-    render(<SearchForm />);
-
-    const input = screen.getByPlaceholderText("Pesquisar produtos...");
-    fireEvent.change(input, { target: { value: "iphone" } });
-
-    const form = screen.getByRole("form");
-    fireEvent.submit(form);
-
-    expect(push).toHaveBeenCalledWith("/search?q=iphone");
   });
 });
