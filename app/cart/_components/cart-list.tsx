@@ -17,7 +17,7 @@ const CartList = () => {
     return (
       <div className="flex flex-col gap-2">
         {Array.from({ length: 3 }).map((_, index) => (
-          <div key={`cart-item-${index}`} className="h-[160px] animate-pulse rounded-lg bg-primary/10" />
+          <div key={`cart-item-${index}`} className="mx-auto h-[394px] w-full max-w-4xl animate-pulse rounded-lg bg-primary/10 md:h-[184px]" />
         ))}
       </div>
     );
