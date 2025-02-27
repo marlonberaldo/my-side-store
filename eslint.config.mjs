@@ -11,7 +11,7 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript", "plugin:tailwindcss/recommended"),
+  ...compat.extends("next/core-web-vitals", "next/typescript", "plugin:tailwindcss/recommended", "plugin:testing-library/react", "plugin:jest-dom/recommended"),
   {
     rules: {
       "no-console": ["warn", { allow: ["warn", "error"] }],
