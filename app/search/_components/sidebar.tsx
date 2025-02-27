@@ -37,7 +37,7 @@ export default function Sidebar({ categories }: SidebarProps) {
         </label>
         <select
           id="category-select"
-          className={cn("w-full sm:max-w-[350px] rounded border p-2",
+          className={cn("w-full sm:max-w-[350px] rounded border px-2 h-10 min-h-10",
             isPending && "opacity-50 pointer-events-none animate-pulse"
           )}
           value={selected}
@@ -90,3 +90,22 @@ export default function Sidebar({ categories }: SidebarProps) {
     </aside>
   );
 };
+
+export function SidebarFallback() {
+  return (
+    <aside className="z-40 h-full bg-background lg:sticky lg:top-[60px] lg:w-[220px] lg:min-w-[220px] lg:border-r lg:p-4">
+      <div className="mb-4 lg:hidden">
+        <div className="pointer-events-none flex h-10 min-h-10 w-full animate-pulse items-center justify-start rounded border bg-primary/10 px-2 opacity-50 sm:max-w-[350px]" />
+      </div>
+
+      <ol className="hidden gap-1 lg:flex lg:flex-col">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <li
+            key={`category-${index}`}
+            className="h-10 min-h-10 w-full animate-pulse rounded border bg-primary/10 px-2"
+          />
+        ))}
+      </ol>
+    </aside>
+  );
+}
