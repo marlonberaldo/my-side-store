@@ -27,7 +27,7 @@ export default async function SearchPage(props: Params) {
   const resultsText = products.length > 1 ? "resultados" : "resultado";
 
   return (
-    <main>
+    <main className="w-full">
       {q && (
         <p className="mb-4 text-muted-foreground">
           {products.length === 0
@@ -36,7 +36,6 @@ export default async function SearchPage(props: Params) {
           }
           <strong className="font-bold">&quot;{q}&quot;</strong>
         </p>
-
       )}
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
@@ -48,7 +47,7 @@ export default async function SearchPage(props: Params) {
         ))}
       </div>
 
-      <Pagination hasMore={hasMore} />
+      {products.length > 0 && <Pagination hasMore={hasMore} />}
     </main>
   );
 }
